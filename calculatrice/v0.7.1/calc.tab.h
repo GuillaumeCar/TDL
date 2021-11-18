@@ -53,10 +53,15 @@ extern int yydebug;
     SUB = 259,
     AFF = 260,
     RC = 261,
-    NBR = 262,
-    ACCI = 263,
-    ACCD = 264,
-    FLT = 265
+    MUL = 262,
+    DIV = 263,
+    PARG = 264,
+    PARD = 265,
+    NBR = 266,
+    ACCI = 267,
+    ACCD = 268,
+    FLT = 269,
+    UMINUS = 270
   };
 #endif
 
@@ -64,12 +69,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 11 "calc.y"
+#line 10 "calc.y"
 
     int iVal;
     double dVal;
 
-#line 73 "calc.tab.h"
+#line 78 "calc.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

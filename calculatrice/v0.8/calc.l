@@ -9,6 +9,10 @@
 "+"				        return ADD;
 "-"				        return SUB;
 "="                     return AFF;
+"*"                     return MUL;
+"/"                     return DIV;
+"("                     return PARG;
+")"                     return PARD;
 \n 				        return RC;
 [a-z]                   { yylval.iVal = yytext[0]-'a'; return ACCI; }
 [A-Z]                   { yylval.iVal = yytext[0]-'A'; return ACCD; }

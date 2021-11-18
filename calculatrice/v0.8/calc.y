@@ -5,7 +5,6 @@ extern int yylex(void);
 void yyerror(char *s);
 int accus[26];
 double accusDouble[26];
-int isFloat = 0;
 %}
 
 %union {
@@ -13,12 +12,16 @@ int isFloat = 0;
     double dVal;
 }
 
-%token ADD SUB AFF RC
+%token ADD SUB AFF RC MUL DIV PARG PARD
 %token <iVal> NBR ACCI ACCD
 %token <dVal> FLT
 
 %type <dVal> expr assign val
 
+%right AFF
+%left ADD SUB
+%left MUL DIV
+%nonassoc UMINUS
 %start list
 
 %%
@@ -35,14 +38,18 @@ assign :
     ;
 
 expr : 
-    expr ADD expr { $$ = $1 + $3; puts("Addition : ");}
+    PARG expr PARD { $$ = $2; }
+    | expr ADD expr { $$ = $1 + $3; puts("Addition : ");}
     | expr SUB expr { $$ = $1 - $3; puts("Soustraction : ");}
-    | SUB val { $$ = -$2; }
+    | expr MUL expr {$$=$1*$3 ; puts("Multiplication ");}
+	| expr DIV expr { $$=$1/$3; }
+    | SUB val { $$ = -$2; } %prec UMINUS
     | val { $$ = $1; }
     ;
+
 val : 
-    NBR { $$ = $1; isFloat = 0; }
-    | FLT { $$ = $1; isFloat = 1; }
+    NBR { $$ = $1; }
+    | FLT { $$ = $1; }
     | ACCI { $$ = accus[$1]; }
     | ACCD { $$ = accusDouble[$1]; }
     ;
