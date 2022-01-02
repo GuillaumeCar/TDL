@@ -10,10 +10,10 @@ int accus[26];
 %token NBR ACC
 
 %start list
-%union {
-    int iVal;
-    double dVal;
-}
+// %union {
+//     int iVal;
+//     double dVal;
+// }
 
 %%
 list : /* VIDE */
