@@ -24,7 +24,7 @@
 /* Tokens pour les variables : passage de UNDEF vers IVAR/FVAR */
 %token <symb> IVAR FVAR
 /* Typage des unités syntaxiques */
-%type <reel> expr assgn
+%type <reel> expr assgn valeur
 
 %token ADD SUB RC AFF MUL DIV EQ NEQ AND OR
 
@@ -40,7 +40,7 @@
 %%
 list    :   /* VIDE */
         | list expr RC      {   printFloat($2); }
-        | list assign RC    {   printFloat($2); }
+        | list assgn RC    {   printFloat($2); }
         | list error RC     {   yyerror("DANGER !"); yyerrok; }
         | list RC
         ;
